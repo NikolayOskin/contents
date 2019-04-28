@@ -16,7 +16,7 @@ final class TextHandler
             throw new \InvalidArgumentException('Text can not be empty');
         }
         $this->text = $text;
-        $this->tags = $this->filterHeadersTags($tags, $this->text);
+        $this->tags = $this->filterUnusedHeadersTags($tags, $this->text);
         $this->headersParser = new HeadersParser($this->tags, $this->text);
         if ($minLength) {
             $this->minLength = $minLength;
@@ -35,9 +35,6 @@ final class TextHandler
         return $this->headersParser->getParsedHeaders();
     }
 
-    /**
-     * @return null|string|string[]
-     */
     public function getProcessedText() : string
     {
         if ($this->isTextTooShort()) {
@@ -46,14 +43,11 @@ final class TextHandler
         if ($this->handledText) {
             return $this->handledText;
         }
-        $this->handledText = $this->addIdsToHeaders();
+        $this->handledText = $this->addIdAttributesToHeaders();
         return $this->handledText;
     }
 
-    /**
-     * @return null|string|string[]
-     */
-    private function addIdsToHeaders()
+    private function addIdAttributesToHeaders() : string
     {
         $tagCount = 0;
         $prevTagLevel = '';
@@ -67,13 +61,7 @@ final class TextHandler
         return $handledText;
     }
 
-    /**
-     * @param $prevTagLevel
-     * @param int $tagCount
-     * @param $matchedHeader
-     * @return string
-     */
-    private function handleHeader(&$prevTagLevel, int &$tagCount, $matchedHeader)
+    private function handleHeader(&$prevTagLevel, int &$tagCount, array $matchedHeader)
     {
         $currTagLevel =  array_search($matchedHeader[1], $this->tags);
         if ($prevTagLevel === ''|| $currTagLevel - $prevTagLevel <= 1) {
@@ -84,23 +72,13 @@ final class TextHandler
         return $matchedHeader[0];
     }
 
-    /**
-     * @param int $tagCount
-     * @param $matchedHeader
-     * @return string
-     */
-    private function getFormattedHeader(int $tagCount, $matchedHeader)
+    private function getFormattedHeader(int $tagCount, array $matchedHeader) : string
     {
         return "<{$matchedHeader[1]} " . 'id="header-'
             . $tagCount . '"' . $matchedHeader[2] . '>';
     }
 
-    /**
-     * @param array $tags
-     * @param string $text
-     * @return array
-     */
-    private function filterHeadersTags(array $tags, string $text) : array
+    private function filterUnusedHeadersTags(array $tags, string $text) : array
     {
         $tags = array_filter($tags, function ($tag) use ($text) {
             return preg_match("|<{$tag}([^>]*)>|i", $text);
@@ -108,17 +86,11 @@ final class TextHandler
         return $tags;
     }
 
-    /**
-     * @return bool
-     */
     private function isTextTooShort() : bool
     {
         return strlen($this->text) < $this->minLength;
     }
 
-    /**
-     * @return string
-     */
     private function getPatternFromTags() : string
     {
         $patternString = '(' . implode('|', $this->tags) . ')';
