@@ -1,0 +1,19 @@
+{
+    "name": "nikolay-oskin/contents",
+    "description": "Contents generator for posts, news, articles or any other text",
+    "authors": [
+        {
+            "name": "Nikolay Oskin",
+            "email": "nickolayoskin@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "NikolayOskin\\Contents\\": "src/"
+        }
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}
