@@ -1,6 +1,9 @@
 <?php
 
 $text = '
+    
+    <h1>Article title</h1>
+
     <h2>First h2</h2>
     <p>Some text</p>
     
@@ -37,6 +40,6 @@ $text = '
     <h6>Again h6</h6>
     <p>Some text</p>
     
-    <h2>End</h2>
+    <h2>Latest header</h2>
     <p>Some text</p>
 ';
