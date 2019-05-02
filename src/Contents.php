@@ -6,23 +6,24 @@ class Contents
 {
     private $tags = ['h2', 'h3'];
     private $textHandler;
+    private $tagsValidator;
     private $contentsGenerator;
     private $text;
 
     public function __construct(string $text, array $tags = [], int $minLength = 0)
     {
-        $this->text = $text;
         $this->contentsGenerator = new ContentsFromHeadersGenerator();
+        $this->tagsValidator = new TagsValidator();
+        $this->text = $text;
         if (!empty($tags)) {
-            $this->tags = (new TagsValidator())->validate($tags);
+            $this->tags = $this->tagsValidator->validate($tags);
         }
         $this->textHandler = new TextHandler($this->text, $this->tags, $minLength);
     }
 
     /**
-     * returns handled text with id attributes added to headers tags or
+     * returns handled text with id html attributes added to headers tags or
      * unhandled text if text's length lower than minLength.
-     * @return null|string|string[]
      */
     public function getHandledText()
     {
@@ -36,7 +37,6 @@ class Contents
     public function getContents()
     {
         $headers = $this->textHandler->getHeaders();
-        print_r($headers);
         return $headers ? $this->contentsGenerator->generateFromHeaders($headers) : [];
     }
 }

@@ -54,7 +54,7 @@ final class TextHandler
         $handledText = preg_replace_callback(
             $this->getPatternFromTags(),
             function ($matchedHeader) use (&$tagCount, &$prevTagLevel) {
-                $this->handleHeader($prevTagLevel, $tagCount, $matchedHeader);
+                return $this->handleHeader($prevTagLevel, $tagCount, $matchedHeader);
             },
             $this->text
         );
