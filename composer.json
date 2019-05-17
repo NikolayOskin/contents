@@ -12,8 +12,16 @@
             "NikolayOskin\\Contents\\": "src/"
         }
     },
-    "require": {},
+    "minimum-stability": "stable",
+    "autoload-dev": {
+        "psr-4": {
+            "NikolayOskin\\PackageTest\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^7.0"
+    },
     "require-dev": {
-        "phpunit/phpunit": "^7"
+        "phpunit/phpunit": "^6.4"
     }
 }
