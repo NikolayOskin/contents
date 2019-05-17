@@ -4,9 +4,11 @@
     "authors": [
         {
             "name": "Nikolay Oskin",
-            "email": "nickolayoskin@gmail.com"
+            "email": "nickolayoskin@gmail.com",
+            "role": "Developer"
         }
     ],
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "NikolayOskin\\Contents\\": "src/"
@@ -19,9 +21,20 @@
         }
     },
     "require": {
-        "php": "^7.0"
+        "php": "^7.0",
+        "illuminate/support": "5.8.*"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NikolayOskin\\Contents\\ContentsServiceProvider"
+            ],
+            "aliases": {
+                "Contents": "NikolayOskin\\Contents\\ContentsFacade"
+            }
+        }
     }
 }
