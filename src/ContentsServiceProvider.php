@@ -12,12 +12,12 @@ class ContentsServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'contents');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'contents');
+        $this->loadViewsFrom(__DIR__.'/views', 'contents');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/contents'),
+            __DIR__ . '/views' => resource_path('views/vendor/contents'),
         ], 'views');
 
         if ($this->app->runningInConsole()) {
@@ -27,7 +27,7 @@ class ContentsServiceProvider extends ServiceProvider
 
             // Publishing the views.
             $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/contents'),
+                __DIR__.'/views' => resource_path('views/vendor/contents'),
             ], 'views');
 
             // Publishing assets.
