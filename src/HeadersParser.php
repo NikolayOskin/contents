@@ -20,6 +20,7 @@ final class HeadersParser
         $pattern = "~<{$patternString}([^>]*)>(.*)</\s*\g1\s*>~i";
         preg_replace_callback($pattern, [$this, 'handleMatchedTag'], $this->text);
         $this->validateHeadersStructure();
+        $this->addHeaderId();
         return $this->parsedHeaders;
     }
 
@@ -45,17 +46,19 @@ final class HeadersParser
         foreach ($this->parsedHeaders as $key => $header) {
             $this->deleteUnstructuredHeader($key, $this->parsedHeaders);
         }
-//        for ($i = 0; $i <= count($this->parsedHeaders); $i++) {
-//            if ($i > 0 && (($this->parsedHeaders[$i]['level'] - $this->parsedHeaders[$i - 1]['level']) > 1)) {
-//                unset($this->parsedHeaders[$i]);
-//            }
-//        }
     }
 
     private function deleteUnstructuredHeader(int $key, &$headers) : void
     {
         if ($key > 0 && ($headers[$key]['level'] - $headers[$key - 1]['level'] > 1)) {
             unset($headers[$key]);
+        }
+    }
+
+    private function addHeaderId()
+    {
+        foreach ($this->parsedHeaders as $key => &$header) {
+            $header['id'] = $key + 1;
         }
     }
 }

@@ -4,50 +4,36 @@ namespace NikolayOskin\Contents;
 
 final class TextHandler
 {
-    private $text;
     private $tags;
-    private $handledText;
-    private $minLength = 1000;
     private $headersParser;
-
-    public function __construct(string $text, array $tags, int $minLength)
-    {
-        if (!$text) {
-            throw new \InvalidArgumentException('Text can not be empty');
-        }
-        $this->text = $text;
-        $this->tags = $this->filterUnusedHeadersTags($tags, $this->text);
-        $this->headersParser = new HeadersParser($this->tags, $this->text);
-        if ($minLength) {
-            $this->minLength = $minLength;
-        }
-    }
 
     /**
      * Exctracting provided headers (or default) tags from text
+     * @param string $text
+     * @param array $tags
+     * @param int $minLength
      * @return array
      */
-    public function getHeaders() : array
+    public function getHeadersFromTextByTags(string $text, array $tags, int $minLength) : array
     {
-        if ($this->isTextTooShort()) {
+        if ($this->isTextTooShort($text, $minLength)) {
             return [];
         }
+        $tags = $this->filterUnusedHeadersTags($tags, $text);
+        $this->headersParser = new HeadersParser($tags, $text);
         return $this->headersParser->getParsedHeaders();
     }
 
-    public function getProcessedText() : string
+    public function getProcessedText(string $text, array $tags, int $minLength) : string
     {
-        if ($this->isTextTooShort()) {
-            return $this->text;
+        if ($this->isTextTooShort($text, $minLength)) {
+            return $text;
         }
-        if ($this->handledText) {
-            return $this->handledText;
-        }
-        $this->handledText = $this->addIdAttributesToHeaders();
-        return $this->handledText;
+        $this->tags = $this->filterUnusedHeadersTags($tags, $text);
+        return $this->addIdAttributesToHeadersInText($text);
     }
 
-    private function addIdAttributesToHeaders() : string
+    private function addIdAttributesToHeadersInText(string $text) : string
     {
         $tagCount = 0;
         $prevTagLevel = '';
@@ -56,7 +42,7 @@ final class TextHandler
             function ($matchedHeader) use (&$tagCount, &$prevTagLevel) {
                 return $this->handleHeader($prevTagLevel, $tagCount, $matchedHeader);
             },
-            $this->text
+            $text
         );
         return $handledText;
     }
@@ -64,7 +50,7 @@ final class TextHandler
     private function handleHeader(&$prevTagLevel, int &$tagCount, array $matchedHeader)
     {
         $currTagLevel =  array_search($matchedHeader[1], $this->tags);
-        if ($prevTagLevel === ''|| $currTagLevel - $prevTagLevel <= 1) {
+        if ($prevTagLevel === '' || $currTagLevel - $prevTagLevel <= 1) {
             $tagCount++;
             $prevTagLevel = $currTagLevel;
             return $this->getFormattedHeader($tagCount, $matchedHeader);
@@ -86,9 +72,9 @@ final class TextHandler
         return $tags;
     }
 
-    private function isTextTooShort() : bool
+    private function isTextTooShort(string $text, int $minLength) : bool
     {
-        return strlen($this->text) < $this->minLength;
+        return strlen($text) < $minLength;
     }
 
     private function getPatternFromTags() : string

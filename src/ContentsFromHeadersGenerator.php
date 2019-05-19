@@ -14,7 +14,7 @@ class ContentsFromHeadersGenerator
     {
         $newArr = [];
         $level1 = 1;
-        for ($i = 0; $i <= count($headers); $i++) {
+        for ($i = 0; $i < count($headers); $i++) {
             $currentLevel = $headers[$i]['level'];
             if ($currentLevel === 0) {
                 $newArr[] = $headers[$i];
