@@ -103,5 +103,5 @@ composer require nikolay-oskin/contents
 To copy views to your resource/views directory:
 
 ```sh
-php artisan vendor:publish --provider="NikolayOskin\Contents\Contents"
+php artisan vendor:publish --provider="NikolayOskin\Contents\ContentsServiceProvider"
 ```
