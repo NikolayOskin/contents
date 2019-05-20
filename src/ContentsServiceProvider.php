@@ -12,10 +12,6 @@ class ContentsServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
 
-            $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('contents.php'),
-            ], 'config');
-
             // Publishing the views.
             $this->publishes([
                 __DIR__.'/views' => resource_path('views/nikolay-oskin/contents'),
