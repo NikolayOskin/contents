@@ -12,7 +12,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "NikolayOskin\\Contents\\": "src"
+          "com\\bitshammer\\": "src/"
         }
     },
     "minimum-stability": "stable",

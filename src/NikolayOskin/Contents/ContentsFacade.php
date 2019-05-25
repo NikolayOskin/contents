@@ -1,6 +1,6 @@
 <?php
 
-namespace NikolayOskin\Contents;
+namespace com\bitshammer\NikolayOskin\Contents;
 
 use Illuminate\Support\Facades\Facade;
 

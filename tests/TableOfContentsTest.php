@@ -2,8 +2,8 @@
 
 namespace NikolayOskin\Contents\Tests;
 
+use com\bitshammer\NikolayOskin\Contents\Contents;
 use InvalidArgumentException;
-use NikolayOskin\Contents\Contents;
 use PHPUnit\Framework\TestCase;
 
 class TableOfContentsTest extends TestCase
