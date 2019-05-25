@@ -1,5 +1,8 @@
 <?php
 
+namespace NikolayOskin\Contents\Tests;
+
+use InvalidArgumentException;
 use NikolayOskin\Contents\Contents;
 use PHPUnit\Framework\TestCase;
 

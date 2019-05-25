@@ -12,13 +12,13 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "NikolayOskin\\Contents\\": "src/"
+            "NikolayOskin\\Contents\\": "src"
         }
     },
     "minimum-stability": "stable",
     "autoload-dev": {
         "psr-4": {
-            "NikolayOskin\\PackageTest\\Tests\\": "tests"
+            "NikolayOskin\\Contents\\Tests\\": "tests"
         }
     },
     "require": {
