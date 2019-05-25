@@ -18,7 +18,6 @@
     "minimum-stability": "stable",
     "autoload-dev": {
         "psr-4": {
-            "NikolayOskin\\Contents\\": "src/",
             "NikolayOskin\\PackageTest\\Tests\\": "tests"
         }
     },

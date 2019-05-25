@@ -8,13 +8,13 @@ class ContentsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/views', 'contents');
+        $this->loadViewsFrom(__DIR__ . '/views', 'contents');
 
         if ($this->app->runningInConsole()) {
 
             // Publishing the views.
             $this->publishes([
-                __DIR__.'/views' => resource_path('views/nikolay-oskin/contents'),
+                __DIR__ . '/views' => resource_path('views/nikolay-oskin/contents'),
             ], 'views');
 
         }
