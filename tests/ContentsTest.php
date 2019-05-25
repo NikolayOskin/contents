@@ -2,11 +2,11 @@
 
 namespace NikolayOskin\Contents\Tests;
 
-use com\bitshammer\NikolayOskin\Contents\Contents;
+use NikolayOskin\Contents\Contents;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-class TableOfContentsTest extends TestCase
+class ContentsTest extends TestCase
 {
     public function test_tags_array_element_has_incorrect_string_exception()
     {

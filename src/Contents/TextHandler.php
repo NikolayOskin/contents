@@ -1,6 +1,6 @@
 <?php
 
-namespace com\bitshammer\NikolayOskin\Contents;
+namespace NikolayOskin\Contents;
 
 final class TextHandler
 {
