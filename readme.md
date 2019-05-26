@@ -2,6 +2,7 @@
 
 This package provides clickable Table Of Contents for your posts, news, articles etc based on h2-h6 html tags from input text.
 
+[![Build Status](https://travis-ci.org/NikolayOskin/contents.svg?branch=master)](https://travis-ci.org/NikolayOskin/contents)
 [![laravel version](https://img.shields.io/badge/Laravel%20version-≧5.5-red.svg)](https://github.com/NikolayOskin/contents)
 
 ## Usage
