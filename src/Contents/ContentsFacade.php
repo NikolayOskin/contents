@@ -4,9 +4,6 @@ namespace NikolayOskin\Contents;
 
 use Illuminate\Support\Facades\Facade;
 
-/**
- * @see \NikolayOskin\Contents\Skeleton\SkeletonClass
- */
 class ContentsFacade extends Facade
 {
     /**
